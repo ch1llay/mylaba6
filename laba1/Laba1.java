@@ -3,19 +3,14 @@
 вывести дробную часть десятичной дроби р = m/n для первых двух
 целых положительных чисел n и m, расположенных подряд.*/
 
-package com.laba1;
 
 import java.util.Scanner;
 
 public class Laba1 {
 
     public static void main(String[] args) {
-//        // кодировка
-//        // *********
-//        System.setProperty("file.encoding","UTF-8");
-//        // *********
         Scanner in = new Scanner(System.in);
-        System.out.println("Введите сколько чисел вы хотите ввести ");
+        System.out.println("Введите t ");
         int t = in.nextInt();
         if (t >= 2) {
             float n = -1;
@@ -31,8 +26,12 @@ public class Laba1 {
                         m = k;
                 }
             }
-            float result = m / n;
-            System.out.println(result - (int) result);
+            float p = m / n;
+            float result = p - (int) p
+            System.out.println(result);
+        }
+        else{
+            System.out.println("Для работы программы нужно как минимум 2 числа");
         }
     }
 }
