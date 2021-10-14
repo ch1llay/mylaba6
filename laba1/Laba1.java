@@ -10,8 +10,9 @@ public class Laba1 {
 
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
-        System.out.println("Введите t ");
+        System.out.print("t = ");
         int t = in.nextInt();
+        System.out.println("Введите числа");
         if (t >= 2) {
             float n = -1;
             float m = -1;
@@ -27,8 +28,8 @@ public class Laba1 {
                 }
             }
             float p = m / n;
-            float result = p - (int) p
-            System.out.println(result);
+            float result = p - (int) p;
+            System.out.println("result = " + result);
         }
         else{
             System.out.println("Для работы программы нужно как минимум 2 числа");
