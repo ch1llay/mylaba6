@@ -9,17 +9,35 @@
 
 package com.company;
 
+import javax.sound.midi.Soundbank;
+import java.util.Locale;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
 public class Main {
 
-    public static void main(String[] args) {
-        // (\d+|\w[a-z] | \w[A-z]+){8,}
-        String pattern = "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*_).{8,}";
+    // сообщение о результате проверки ввода на соотвествие паттерну
+    static String getPasswordReliability(String pattern, String userInput){
+        return complianceCheck(pattern, userInput) ? "пароль надежный" : "пароль не надежный";
+    }
+    // получение пользовательского ввода
+    static String getUserInput(){
+        System.out.print("Введите пароль для анализа ");
         Scanner in = new Scanner(System.in);
-        boolean isCorrect = Pattern.matches(pattern, in.next());
-        String result = isCorrect ? "correct" : "wrong";
-        System.out.println(result);
+        return in.next();
+    }
+    // проверяет соответствии userInput паттерну регулярного выражения pattern
+    static boolean complianceCheck(String pattern, String userInput){
+        return Pattern.matches(pattern, userInput);
+    }
+    public static void main(String[] args) {
+        System.out.println("Приложение проверяет надежность набранного пароля ");
+        String pattern = "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*_).{8,}";
+        String input = getUserInput();
+        while(!input.equals("выход")) {
+            System.out.println(getPasswordReliability(pattern, input));
+            System.out.println("Для выхода напишите выход");
+            input = getUserInput();
+        }
     }
 }
