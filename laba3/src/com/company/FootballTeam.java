@@ -1,20 +1,19 @@
 package com.company;
 
-import java.util.List;
 import java.util.Map;
 
 public class FootballTeam extends Team {
     String trainer;
     int countGol;
     int CountGolLoss;
-    int countVictory;
+    int victoryAmount;
     boolean isPlayMatch;
     Map<Integer, Player> players;
     Map<Integer, Player> reservePlayers;
     //количество голов забитых кол-во пропущенных суммарный фонд зарплаты трененр количество тренеров капитан командыд запасной капитан команды
 
     int CountK(){
-        return countGol + countVictory - CountGolLoss;
+        return countGol + victoryAmount - CountGolLoss;
     }
     void StartMatch() {
         isPlayMatch = true;
