@@ -13,6 +13,9 @@ public class FootballTeam extends Team {
     Map<Integer, Player> reservePlayers;
     //количество голов забитых кол-во пропущенных суммарный фонд зарплаты трененр количество тренеров капитан командыд запасной капитан команды
 
+    int CountK(){
+        return countGol + countVictory - CountGolLoss;
+    }
     void StartMatch() {
         isPlayMatch = true;
     }
