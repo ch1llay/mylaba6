@@ -3,6 +3,7 @@ package com.company;
 public class Main {
 
     public static void main(String[] args) {
-	// write your code here
+        RussianLeague russianLeague = new RussianLeague();
+        russianLeague.AddTeamToLeague(new RussianFootballTeam());
     }
 }

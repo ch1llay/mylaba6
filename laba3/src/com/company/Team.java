@@ -10,11 +10,13 @@ public class Team {
 
     // прокричать девиз
     void CrySlogan() {
+
         System.out.println(slogan);
     }
 
     //начать тренировку
     void StartTraining() {
+
         isTraining = true;
     }
 
