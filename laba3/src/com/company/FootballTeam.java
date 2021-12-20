@@ -3,20 +3,23 @@ package com.company;
 import java.util.Map;
 
 public class FootballTeam extends Team {
-    String trainer;
+
+    String city;
     int victoryAmount;
     boolean isPlayMatch;
-    Map<Integer, Player> playersMainContain;
-    Map<Integer, Player> playersReserveContain;
+    int placeInLeague;
+    int priceClub;
+    String hymn = "Славься отество наше сводное";
 
-    void FinishMatch() {
+
+    void songHymn(){
+        System.out.println(hymn);
+    }
+    void startMatch(){
+        isPlayMatch = true;
+    }
+    void finishMatch() {
         isPlayMatch = false;
     }
 
-    public void DoReplace(int oldN, int newN) {
-        Player oldPlayer = playersMainContain.remove(oldN);
-        Player newPlayer = playersReserveContain.remove(newN);
-        playersMainContain.put(newN, newPlayer);
-        playersReserveContain.put(oldN, oldPlayer);
-    }
 }

@@ -2,11 +2,14 @@ package com.company;
 
 public class Team {
     int amountMembers;
-    int amountMembersInMainContain;
-    int getAmountMembersInReserveContain;
     String title;
     boolean isTraining = false;
     String slogan;
+    String trainer;
+
+
+
+
 
     // прокричать девиз
     void CrySlogan() {

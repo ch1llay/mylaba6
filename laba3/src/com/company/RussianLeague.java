@@ -5,13 +5,16 @@ import java.util.Comparator;
 
 public class RussianLeague {
     int teamAmount;
-    ArrayList<RussianFootballTeam> teams;
+    ArrayList<RussianFootballTeam> teams = new ArrayList<>();
     RussianFootballTeam teamWithTheMostVictoryAmount;
-
     double averageAmountVictory;
 
 
 
+
+    public RussianLeague(int teamAmount){
+        this.teamAmount = teamAmount;
+    }
     public void AddTeamToLeague(RussianFootballTeam team){
         teams.add(team);
     }
@@ -60,7 +63,7 @@ public class RussianLeague {
         }
         return teamWithTheMostVictoryAmount;
     }
-    private RussianFootballTeam FindTeam(String titleTeam){
+    public RussianFootballTeam FindTeam(String titleTeam){
         RussianFootballTeam team = null;
         for (int i = 0; i < teams.size(); i++) {
             team = teams.get(i);
@@ -70,10 +73,9 @@ public class RussianLeague {
         return team;
     }
     // замена игрока в команде, вывод информации о команде
-    public void AddPlayerToReserveContains(String titleTeam, int oldPlayerNumber, int newPlayerNumber){
+    public void changePlaceInLegue(String titleTeam, int placeInLegue){
         RussianFootballTeam team = FindTeam(titleTeam);
-        team.DoReplace(oldPlayerNumber, newPlayerNumber);
-        team.GetInformationAboutTeam();
+        team.placeInLeague = placeInLegue;
 
     }
 }
