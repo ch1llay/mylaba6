@@ -47,7 +47,7 @@ public class RussianLeague {
         teams.sort(new Comparator<FootballTeam>() {
             @Override
             public int compare(FootballTeam o1, FootballTeam o2) {
-                return Integer.compare(o2.victoryAmount, o1.victoryAmount);
+                return Integer.compare(o2.placeInLeague, o1.placeInLeague);
             }
         });
     }
@@ -63,6 +63,17 @@ public class RussianLeague {
         }
         return teamWithTheMostVictoryAmount;
     }
+    // найти команду по месту в лиге
+    public RussianFootballTeam FindTeamByPlace(int place){
+        RussianFootballTeam team = null;
+        for (int i = 0; i < teams.size(); i++) {
+            team = teams.get(i);
+            if(team.placeInLeague == place)
+                break;
+        }
+        return team;
+    }
+    // найти команду по названию
     public RussianFootballTeam FindTeam(String titleTeam){
         RussianFootballTeam team = null;
         for (int i = 0; i < teams.size(); i++) {
@@ -73,9 +84,10 @@ public class RussianLeague {
         return team;
     }
     // замена игрока в команде, вывод информации о команде
-    public void changePlaceInLegue(String titleTeam, int placeInLegue){
+    public void changeBudgetTeam(String titleTeam, int budget){
         RussianFootballTeam team = FindTeam(titleTeam);
-        team.placeInLeague = placeInLegue;
+        int oldPlace = team.placeInLeague;
+       team.budgetClub = budget;
 
     }
 }

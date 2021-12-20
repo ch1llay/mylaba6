@@ -8,8 +8,8 @@ public class FootballTeam extends Team {
     int victoryAmount;
     boolean isPlayMatch;
     int placeInLeague;
-    int priceClub;
-    String hymn = "Славься отество наше сводное";
+    int budgetClub;
+    String hymn = "Славься отечество наше свободное";
 
 
     void songHymn(){

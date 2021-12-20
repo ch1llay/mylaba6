@@ -3,23 +3,34 @@ package com.company;
 import java.util.*;
 
 public class RussianFootballTeam extends FootballTeam{
-    int amountGoodKick;
-    int amountBadKick;
-    int amountYellowCard;
-    int amountRedCard;
-
+    String stadium;
+    String president;
+    int foundation;
+    String capitan;
     boolean isVictory = false;
-    public toString(){
-        return "" + title;
+
+    @Override
+    public String toString(){
+        return  "\nНазвание      : " + title + "\n" +
+                "Город         : " + city + "\n" +
+                "Главный тренер: " + trainer + "\n" +
+                "Капитан       : " + capitan + "\n" +
+                "Бюджет        : " + budgetClub + " млн р.\n" +
+                "Число побед   : " + victoryAmount + "\n" +
+                "Место в лиге  : " + placeInLeague + "\n";
     }
 
-    public RussianFootballTeam(String title, String city, String trainer, int placeInLeague, int price, int victoryAmount){
+    public RussianFootballTeam(String title, String city, String trainer, int placeInLeague, int budged, int victoryAmount, String capitan, String stadium, String president, int foundation){
         this.title = title;
         this.city = city;
         this.trainer = trainer;
+        this.capitan = capitan;
         this.placeInLeague = placeInLeague;
-        this.priceClub = price;
+        this.budgetClub = budged;
         this.victoryAmount = victoryAmount;
+        this.stadium = stadium;
+        this.president = president;
+        this.foundation = foundation;
     }
 
     public boolean isVictory() {
@@ -33,17 +44,11 @@ public class RussianFootballTeam extends FootballTeam{
 
     public boolean PlayMatch(){
         isVictory = !(RandomInt(0, 3) < 2);
-        amountBadKick += RandomInt(10, 20);
-        amountGoodKick += RandomInt(5, 15);
-        amountRedCard += RandomInt(1, 3);
-        amountYellowCard += RandomInt(1, 4);
+        if(isVictory) victoryAmount++;
         return isVictory;
     }
-    public void GetInformationAboutTeam(){
-        System.out.println("Команда " + title);
-        System.out.println("");
-        System.out.println("Место в лиге " + placeInLeague);
-
+    public void drinkChampagne(){
+        System.out.println("ггггг");
     }
 
 
