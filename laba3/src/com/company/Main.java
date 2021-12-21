@@ -60,14 +60,18 @@ public class Main {
                         System.out.println("запись найдена");
                         System.out.println("Введите новый бюджет команды (млн р.)");
                         Integer n = null;
-                        while(n==null)
-                            try {
+                        while (in.hasNext()){
+                            try{
                                 n = in.nextInt();
                                 russianLeague.changeBudgetTeam(teamName, n);
                                 System.out.println(russianLeague.FindTeam(teamName));
-                            } catch (Exception e) {
+                                break;
+                            }
+                            catch(Exception ex){
+                                in.next();
                                 System.out.println("введите число");
                             }
+                        }
 
                     } else {
                         System.out.println("такая команда не найдена");
