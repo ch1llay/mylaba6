@@ -26,7 +26,14 @@ public class Main {
         int choice;
         while (true) {
             out();
-            choice = in.nextInt();
+            if(in.hasNextInt()){
+                choice = in.nextInt();
+            }
+            else{
+                in.next();
+                System.out.println("Ошибка, введите число");
+                continue;
+            }
             System.out.println("*************************************");
             switch (choice) {
                 case 0:
