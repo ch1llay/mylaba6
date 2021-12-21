@@ -77,17 +77,23 @@ public class RussianLeague {
     public RussianFootballTeam FindTeam(String titleTeam){
         RussianFootballTeam team = null;
         for (int i = 0; i < teams.size(); i++) {
-            team = teams.get(i);
-            if(team.title.equals(titleTeam))
+            var tempTeam  = teams.get(i);
+            if(tempTeam.title.equals(titleTeam)){
+                team = tempTeam;
                 break;
+
+            }
         }
         return team;
     }
     // замена игрока в команде, вывод информации о команде
-    public void changeBudgetTeam(String titleTeam, int budget){
+    public boolean changeBudgetTeam(String titleTeam, int budget){
         RussianFootballTeam team = FindTeam(titleTeam);
-        int oldPlace = team.placeInLeague;
-       team.budgetClub = budget;
+        if(team != null) {
+            team.budgetClub = budget;
+            return true;
+        }
+        return false;
 
     }
 }

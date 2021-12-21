@@ -56,15 +56,18 @@ public class Main {
                     System.out.println("Введите название команды");
                     String teamName = in.next();
                     if (russianLeague.FindTeam(teamName) != null) {
+                        System.out.println(russianLeague.FindTeam(teamName).title);
                         System.out.println("запись найдена");
                         System.out.println("Введите новый бюджет команды (млн р.)");
-                        try {
-                            int n = in.nextInt();
-                            russianLeague.changeBudgetTeam(teamName, n);
-                            System.out.println(russianLeague.FindTeam(teamName));
-                        } catch (Exception e) {
-                            System.out.println("введите число");
-                        }
+                        Integer n = null;
+                        while(n==null)
+                            try {
+                                n = in.nextInt();
+                                russianLeague.changeBudgetTeam(teamName, n);
+                                System.out.println(russianLeague.FindTeam(teamName));
+                            } catch (Exception e) {
+                                System.out.println("введите число");
+                            }
 
                     } else {
                         System.out.println("такая команда не найдена");
