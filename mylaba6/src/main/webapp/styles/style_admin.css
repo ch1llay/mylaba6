@@ -1,0 +1,109 @@
+@import url(https://fonts.googleapis.com/css?family=Didact+Gothic|Comfortaa:400,700&subset=latin,cyrillic);
+body {
+    background-image: url("/images/back.jpg");
+    font-family: 'Comfortaa', cursive;
+    font-size: 16px;
+    color:#54505c;
+}
+
+h1 {
+    text-align: center;
+    font-family: 'Comfortaa', cursive;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 50px;
+}
+
+table {
+    margin: 10px auto;
+    background-color: #ffebde;
+}
+
+#all_users {
+    width: 65%;
+    margin: 10px auto;
+    background-color: #eed8c9;
+    border-radius: 10px;
+    padding: 10px 0px;
+}
+
+#navigate {
+    width: 40%;
+    margin: 10px auto;
+    background-color: #eed8c9;
+    border-radius: 10px;
+    padding: 10px 0px;
+}
+
+#exit_btn {
+    font-family: 'Comfortaa', cursive;
+    display: inline-block;
+    width: 150px;
+    height: 45px;
+    line-height: 45px;
+    border-radius: 45px;
+    font-size: 11px;
+    text-transform: uppercase;
+    text-align: center;
+    letter-spacing: 3px;
+    font-weight: 600;
+    color: #eed8c9;
+    background-color: #a49592;
+    box-shadow: 0px 0px 23px 11px rgba(0, 0, 0, 0.14);
+    transition: .3s;
+    border-color: transparent;
+    margin-right: auto;
+    margin-right: auto;
+
+}
+
+#exit_btn:hover {
+    background:  #d9c4b6;
+    box-shadow: 0 15px 20px rgba(0, 0, 0, 0.4);
+    color: #54505c;
+    transform: translateY(-7px);
+}
+
+#delete_btn {
+    text-decoration: none;
+    display: inline-block;
+    width: 80px;
+    height: 30px;
+    line-height: 15px;
+    border-radius: 45px;
+    margin: 2px 4px;
+    font-size: 12px;
+    text-transform: uppercase;
+    text-align: center;
+    letter-spacing: 2px;
+    font-weight: 400;
+    color: #eed8c9;
+    background-color: #a49592;
+    font-family: 'Comfortaa', cursive;
+}
+
+#role_btn {
+    text-decoration: none;
+    display: inline-block;
+    width: 80px;
+    height: 30px;
+    line-height: 12px;
+    border-radius: 45px;
+    margin: 2px 4px;
+    font-size: 9px;
+    text-transform: uppercase;
+    text-align: center;
+    letter-spacing: 2px;
+    font-weight: 400;
+    color: #eed8c9;
+    background-color: #a49592;
+    font-family: 'Comfortaa', cursive;
+}
+
+#cent {
+    width: 20%;
+    margin: 10px auto;
+    background-color: #eed8c9;
+    font-size: 16px;
+    text-align: center;
+}
