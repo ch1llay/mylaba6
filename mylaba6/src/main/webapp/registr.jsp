@@ -1,15 +1,15 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page import="java.util.Objects" %>
-<%
-    if (Objects.equals((String) session.getAttribute("AUTH"), "TRUE")) {
-        if (Objects.equals((String) session.getAttribute("STATUS"), "user")) {
-            String url = "/show_your_posts/";
-            url += session.getAttribute("LOGIN");
-            response.sendRedirect(url);
-        } else if (Objects.equals((String) session.getAttribute("STATUS"), "admin"))
-            response.sendRedirect("/show_users");
-    }
-%>
+<%--<%@ page contentType="text/html;charset=UTF-8" language="java" %>--%>
+<%--<%@ page import="java.util.Objects" %>--%>
+<%--<%--%>
+<%--    if (Objects.equals((String) session.getAttribute("AUTH"), "TRUE")) {--%>
+<%--        if (Objects.equals((String) session.getAttribute("STATUS"), "user")) {--%>
+<%--            String url = "/show_your_posts/";--%>
+<%--            url += session.getAttribute("LOGIN");--%>
+<%--            response.sendRedirect(url);--%>
+<%--        } else if (Objects.equals((String) session.getAttribute("STATUS"), "admin"))--%>
+<%--            response.sendRedirect("/show_users");--%>
+<%--    }--%>
+<%--%>--%>
 <html>
 <head>
     <title>Регистрация</title>

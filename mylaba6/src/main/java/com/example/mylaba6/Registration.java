@@ -1,5 +1,7 @@
 package com.example.mylaba6;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -12,13 +14,44 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Objects;
+
+@JsonAutoDetect
+class User{
+    public String nickname;
+    public String userLogin;
+    public String password;
+    public User(){
+
+    }
+}
+@JsonAutoDetect
+class Users{
+    public ArrayList<User> users;
+    public Users(){
+
+    }
+}
 
 /**
  * Class for user registration
  */
 @WebServlet("/reg")
 public class Registration extends HttpServlet {
+    private static String readUsingFiles(String fileName) throws IOException {
+        return new String(Files.readAllBytes(Paths.get(fileName)));
+    }
+    private static void Write(String s, String path){
+        try (BufferedWriter writter = new BufferedWriter(new FileWriter(path))) {
+                writter.write(s);
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
     /**
      * @param req User request (to server) variable
      * @param resp Server response variable
@@ -27,86 +60,41 @@ public class Registration extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");
         // Получение из полей формы данных для авторизации
-        String FirstName = req.getParameter("FirstName");
-        String LastName = req.getParameter("LastName");
+        String nickname = req.getParameter("nickname");
         String login = req.getParameter("login");
         String password = req.getParameter("password");
-        String phone = req.getParameter("phone");
-        String gender = req.getParameter("gender");
-        String age = req.getParameter("age");
         resp.setContentType("text/html;charset=UTF-8");
 
-        File file = new File("users.json");
-        JSONParser parser = new JSONParser();
-        Reader reader;
-        try {
-            reader = new FileReader("users.json");
+        ArrayList<User> users = new ArrayList<>();
+        for(Integer i =0; i < 5; i++){
+            User user = new User();
+            user.userLogin = i.toString();
+            user.password = i.toString();
+            user.nickname = i.toString();
+            users.add(user);
         }
-        catch (IOException e){
-            System.out.println("создал ");
-            Writer writer = new FileWriter(file);
-            writer.write(" ");
-            writer.close();
-            reader = new FileReader("users.json");
+        String path = "users.json";
+        String data = "";
+        if(new File(path).exists()) {
+            data = readUsingFiles(path);
         }
-        try {
-            // Считывание json
-            JSONArray output = (JSONArray) parser.parse(reader);
-            boolean repeatLogin = false;
-            // Проверка на наличие пользователя с заданным логином
-            for(int i = 0; i < output.size(); i++) {
-                JSONObject user = (JSONObject) output.get(i);
-                if (Objects.equals(login, (String) user.get("login"))) {
-                    repeatLogin = true;
-                    break;
-                }
-            }
-            // Если логин не занят, регистрируем
-            if (!repeatLogin) {
-                // Заполнение json-объекта с данными о новом пользователе
-                JSONObject newUser = new JSONObject(); // json-объект с данными о новом пользователе
-                JSONObject lastUser = (JSONObject) output.get(output.size()-1);
-                int lastId = (int) (long) lastUser.get("id"); // Получаем id последнего пользователя
-                // Заполняем данные нового пользователя
-                newUser.put("id", lastId + 1);
-                newUser.put("FirstName", FirstName);
-                newUser.put("LastName", LastName);
-                newUser.put("login", login);
-                newUser.put("password", password);
-                newUser.put("phone", phone);
-                newUser.put("gender", gender);
-                newUser.put("age", age);
-                newUser.put("role", "user");
 
-                // Добавляем в json-массив json-объект с данными пользователя
-                output.add(newUser);
+            StringWriter writer = new StringWriter();
 
-                // Запись в файл
-                Writer writer = new FileWriter(file);
-                writer.write(output.toJSONString());
-                writer.flush();
-                writer.close();
+            //это объект Jackson, который выполняет сериализацию
+            ObjectMapper mapper = new ObjectMapper();
 
-                HttpSession session = req.getSession();
-                // Запуск сессии
-                session.setAttribute("AUTH", "TRUE");
-                session.setAttribute("LOGIN", login);
-                session.setAttribute("STATUS", "user");
-                session.setAttribute("FIRSTNAME", FirstName);
-                session.setAttribute("LASTNAME", LastName);
-                session.setAttribute("GENDER", gender);
-                session.setAttribute("PHONE", phone);
-                session.setAttribute("AGE", age);
-                req.setAttribute("login_user", login);
-                String url = "/show_your_posts/";
-                url += session.getAttribute("LOGIN");
-                resp.sendRedirect(url); // Редирект в ЛК
-            }
-            else{
-                req.setAttribute("login_error","Логин уже занят!");
-                req.getRequestDispatcher("/registr.jsp").forward(req,resp);
-            }
-        } catch (IOException |  ParseException e) { e.printStackTrace(); }
+            Users usersForWrite = new Users();
+            usersForWrite.users = users;
+            // сама сериализация: 1-куда, 2-что
+            mapper.writeValue(writer, usersForWrite);
+            final String dir = System.getProperty("user.dir");
+            Write(writer.toString(), path);
+
+            Users readerUsers = mapper.readValue(readUsingFiles(path), Users.class);
+
+
+
     }
 }
 
