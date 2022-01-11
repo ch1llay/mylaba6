@@ -12,19 +12,6 @@ class User {
     public String password;
     public String role;
 
-    public String getNickname(){
-        return nickname;
-    }
-    public String getLogin(){
-        return userLogin;
-    }
-    public String getPassword(){
-        return password;
-    }
-    public String getRole(){
-        return role;
-    }
-
     public User() {
         role = "user";
     }

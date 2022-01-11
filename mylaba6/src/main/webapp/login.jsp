@@ -20,7 +20,7 @@
     <form method="post" action="auth" id="log_form">
         <p style="background-color: red;">${auth_error}</p>
 
-                Логин<input type="text" required name="login" id="login"></td>
+                Логин<input type="text" required name="login" id="login"><br>
                 Пароль
                 <input type="password" name="password" id="password"><br>
         <br>

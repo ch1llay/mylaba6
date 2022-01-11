@@ -3,11 +3,10 @@
 <%
     if (Objects.equals((String) session.getAttribute("AUTH"), "TRUE")) {
         if (Objects.equals((String) session.getAttribute("STATUS"), "user")) {
-            String url = "/show_your_posts/";
-            url += session.getAttribute("LOGIN");
-            response.sendRedirect(url);
+            request.getRequestDispatcher("user_lk.jsp").forward(request, response);
         } else if (Objects.equals((String) session.getAttribute("STATUS"), "admin"))
-            response.sendRedirect("/show_users");
+            request.getRequestDispatcher("admin_lk.jsp").forward(request, response);
+
     }
 %>
 <html>
