@@ -1,14 +1,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <%@ page import="java.util.Objects" %>
 
 <%
     if (!Objects.equals((String) session.getAttribute("AUTH"), "TRUE"))
         response.sendRedirect("login.jsp");
     else if (!Objects.equals((String) session.getAttribute("STATUS"), "admin")) {
-        String url = "/show_your_posts/";
-        url += session.getAttribute("LOGIN");
-        response.sendRedirect(url);
+        request.getRequestDispatcher("/error_admin.jsp").forward(request, response);
     }
 
 %>
@@ -34,13 +33,8 @@
     <table border="1" width="600">
         <thead>
         <tr>
-            <th>Id</th>
             <th>Никнейм</th>
-            <th>Имя</th>
-            <th>Фамилия</th>
-            <th>Возраст</th>
-            <th>Пол</th>
-            <th>Телефон</th>
+            <th>Логин</th>
             <th>Пароль</th>
             <th>Роль</th>
             <th>Удалить</th>
@@ -48,17 +42,12 @@
         </tr>
         </thead>
         <tbody>
-        <c:forEach var="par" items="${users}">
+        <c:forEach var="user" items="${users}">
             <tr>
-                <td>${par.get("id")}</td>
-                <td>${par.get("login")}</td>
-                <td>${par.get("FirstName")}</td>
-                <td>${par.get("LastName")}</td>
-                <td>${par.get("age")}</td>
-                <td>${par.get("gender")}</td>
-                <td>${par.get("phone")}</td>
-                <td>${par.get("password")}</td>
-                <td>${par.get("role")}</td>
+                <td>${user.getNickname()}</td>
+<%--                <td>${users.get(user.key).getLogin()}</td>--%>
+<%--                <td>${users.get(user.key).getPassword()}</td>--%>
+<%--                <td>${users.get(user.key).getRole()}</td>--%>
 
                 <td>
                     <form action="delete" method="get">

@@ -1,5 +1,6 @@
 package com.example.mylaba6;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -24,32 +25,25 @@ public class SetRole extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        File file = new File("users.json");
-        JSONParser parser = new JSONParser();
-        Reader reader = new FileReader("users.json");
-        String id = req.getParameter("id"); // Получение id пользователя, роль которого нужно изменить
-
-        try {
-            JSONArray oldUsers = (JSONArray) parser.parse(reader);
-            JSONArray newUsers = new JSONArray();
-            for (int i = 0; i < oldUsers.size(); i++) {
-                JSONObject currentUser = (JSONObject) oldUsers.get(i);
-                // Если id i-того пользователя совпадает с нашим, меняем роль
-                if (Objects.equals(Objects.toString(currentUser.get("id"), null), id))
-                    if (Objects.equals((String) currentUser.get("role"), "user"))
-                        currentUser.put("role", "admin");
-                    else if (Objects.equals((String) currentUser.get("role"), "admin"))
-                        currentUser.put("role", "user");
-                newUsers.add(currentUser); // Добавляем i-того пользователя в новый массив пользователей, который запишем в файл
-            }
-            // Запись в файл
-            Writer writer = new FileWriter(file);
-            writer.write(newUsers.toJSONString());
-            writer.flush();
-            writer.close();
-        } catch (ParseException e) {
-            e.printStackTrace();
+        StringWriter writer = new StringWriter();
+        String login = req.getParameter("login");
+        //это объект Jackson, который выполняет сериализацию
+        ObjectMapper mapper = new ObjectMapper();
+        String path = "users.json";
+        Users users = new Users();
+        if (new File(path).exists()) {
+            users = mapper.readValue(RW.readUsingFiles(path), Users.class);
+        } else {
+            mapper.writeValue(writer, users);
+            RW.write(writer.toString(), path);
         }
-        req.getRequestDispatcher("/show_users").forward(req,resp);
+        if(users.users.containsKey(login)){
+            users.users.get(login).role = (users.users.get(login).role.equals("admin") ? "user":"admin");
+            writer = new StringWriter();
+            mapper.writeValue(writer, users);
+            RW.write(writer.toString(), path);
+        }
+
+
     }
 }

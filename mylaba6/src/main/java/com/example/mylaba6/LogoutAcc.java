@@ -25,12 +25,8 @@ public class LogoutAcc extends HttpServlet {
         session.setAttribute("AUTH", "FALSE");
         session.setAttribute("LOGIN", null);
         session.setAttribute("STATUS", null);
-        session.setAttribute("FIRSTNAME", null);
-        session.setAttribute("LASTNAME", null);
-        session.setAttribute("GENDER", null);
-        session.setAttribute("PHONE", null);
-        session.setAttribute("AGE", null);
+        session.setAttribute("NICKNAME", null);
         // Редирект в index.jsp файл
-        resp.sendRedirect("/index.jsp");
+        req.getRequestDispatcher("/index.jsp").forward(req, resp);
     }
 }

@@ -2,7 +2,7 @@
 <%@ page import="java.util.Objects" %>
 <%
     if (Objects.equals((String) session.getAttribute("AUTH"), "TRUE"))
-        response.sendRedirect("user_lk.jsp");
+        response.sendRedirect("/user_lk.jsp");
 %>
 <html>
 <head>
@@ -12,14 +12,14 @@
 
 </head>
 <body>
-<h1>Добро пожаловать в LavanderPeople!</h1>
-<h2>Авторизация</h2>
+<h1 style="margin: auto" >Добро пожаловать в Игромир</h1>
+<h2 style="margin: auto">Авторизация</h2>
 <div id="non-id">
     <form method="post" action="auth" id="log_form">
-        <p>${auth_error}</p>
+        <p style="background-color: red;">${auth_error}</p>
         <table>
             <tr>
-                <td>Никнейм</td>
+                <td>Логин</td>
                 <td><input type="text" required name="login" id="login"></td>
             </tr>
             <tr>

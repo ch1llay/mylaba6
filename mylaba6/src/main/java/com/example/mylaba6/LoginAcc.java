@@ -1,5 +1,6 @@
 package com.example.mylaba6;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -20,7 +21,7 @@ import java.util.Objects;
 @WebServlet("/auth")
 public class LoginAcc extends HttpServlet {
     /**
-     * @param req User request (to server) variable
+     * @param req  User request (to server) variable
      * @param resp Server response variable
      */
     @Override
@@ -28,53 +29,44 @@ public class LoginAcc extends HttpServlet {
         // Получение из полей формы данных для авторизации
         String login = req.getParameter("login");
         String password = req.getParameter("password");
-        JSONParser parser = new JSONParser();
-        Reader reader = new FileReader("users.json");
-        try {
-            // Авторизация
-            JSONArray oldUsers = (JSONArray) parser.parse(reader);
-            JSONArray newUsers = new JSONArray();
-            boolean auth = false;
-            for(int i = 0; i < oldUsers.size(); i++) {
-                JSONObject user = (JSONObject) oldUsers.get(i);
-                // Проверка полученных логина и пароля на наличие в списке пользователей
-                if (Objects.equals(login, user.get("login")))
-                    if (Objects.equals(password, user.get("password"))) {
-                        auth = true;
-                        // Получение сессии
-                        HttpSession session = req.getSession();
-                        // Добавление атрибутов сессии
-                        session.setAttribute("AUTH", "TRUE");
-                        session.setAttribute("LOGIN", login);
-                        session.setAttribute("STATUS", user.get("role"));
-                        session.setAttribute("FIRSTNAME", user.get("FirstName"));
-                        session.setAttribute("LASTNAME", user.get("LastName"));
-                        session.setAttribute("GENDER", user.get("gender"));
-                        session.setAttribute("PHONE", user.get("phone"));
-                        session.setAttribute("AGE", user.get("age"));
-                    }
-                newUsers.add(user);
-                // Запись в файл
-                File file = new File("users.json");
-                Writer writer = new FileWriter(file);
-                writer.write(newUsers.toJSONString());
-                writer.flush();
-                writer.close();
-            }
-            // Если авторизация успешна
-            if (auth){
-                HttpSession session = req.getSession();
-                req.setAttribute("login_user", login);
-                String url = "/show_your_posts/";    // Формирование ссылки для редиректа в ЛК
-                url += session.getAttribute("LOGIN");
-                resp.sendRedirect(url); // Редирект в ЛК
-            }
-            else {
+        StringWriter writer = new StringWriter();
+
+        //это объект Jackson, который выполняет сериализацию
+        ObjectMapper mapper = new ObjectMapper();
+        String path = "users.json";
+        Users users = new Users();
+        if (new File(path).exists()) {
+            users = mapper.readValue(RW.readUsingFiles(path), Users.class);
+        } else {
+            mapper.writeValue(writer, users);
+        }
+        HttpSession session = req.getSession();
+        // Добавление атрибутов сессии
+
+        User user = new User();
+        if (users.users.containsKey(login)) {
+            if (users.users.get(login).password.equals(password)) {
+                user = users.users.get(login);
+
+                session.setAttribute("AUTH", "TRUE");
+                session.setAttribute("STATUS", user.role);
+                session.setAttribute("LOGIN", user.userLogin);
+                session.setAttribute("NICKNAME", user.nickname);
+                if(user.role.equals("admin"))
+                    req.setAttribute("users", users.users.values());
+                req.getRequestDispatcher((user.role.equals("admin") )? "/admin_lk.jsp":"/user_lk.jsp").forward(req, resp); // Редирект в ЛК
+            } else {
                 // Выдача ошибки
                 resp.setContentType("text/html");
-                req.setAttribute("auth_error","Логин и/или пароль неправильный!");
-                req.getRequestDispatcher("/login.jsp").forward(req,resp);
+                req.setAttribute("auth_error", "Логин и/или пароль неправильный!");
+                req.getRequestDispatcher("/login.jsp").forward(req, resp);
             }
-        } catch (IOException | ParseException e) { e.printStackTrace(); }
+
+        } else {
+            // Выдача ошибки
+            resp.setContentType("text/html");
+            req.setAttribute("auth_error", "Логин и/или пароль неправильный!");
+            req.getRequestDispatcher("/login.jsp").forward(req, resp);
+        }
     }
 }

@@ -32,7 +32,7 @@ h1 {
     padding: 40px;
 }
 
-#FirstName, #LastName, #login, #password, #phone, #gender, #age {
+#nickname #login, #password{
     width: 150px;
     height: 35px;
     border-radius: 10px;
