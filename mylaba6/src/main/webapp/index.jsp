@@ -10,9 +10,11 @@
 <html>
 <head>
     <title>Игромир</title>
+    <link rel="stylesheet" type="text/css" href="styles/style.css">
 </head>
 <body>
 <h1>    Добро пожаловать в Игромир</h1>
-Для продолжения<a href="login.jsp">войдите</a>
+Для продолжения<a href="login.jsp"> войдите</a>
+
 </body>
 </html>

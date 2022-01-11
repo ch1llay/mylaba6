@@ -8,7 +8,8 @@
 <html>
 <head>
     <title>Страница пользователя ${myPosts[0].get("login")} </title>
-    <link rel="stylesheet" href="\styles/style_user_account.css">
+    <link rel="stylesheet" type="text/css" href="styles/style.css">
+
 
 </head>
 <body>

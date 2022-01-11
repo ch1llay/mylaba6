@@ -1,0 +1,43 @@
+body{
+    background-image: url(../images/back.png);
+    color:white;
+    text-align: center;
+    font-size: x-large;
+}
+a{
+    color:yellow;
+}
+form {
+    display: block;
+    background: #5B3C67;
+    padding: 50px;
+    width: 100%;
+    color: white;
+    margin-right: auto;
+    margin-left: auto;
+    text-align: center;
+}
+
+form input {
+    box-sizing: border-box;
+    padding: 10px;
+    margin-bottom: 20px;
+//margin-left: 40%;
+    width: 25%;
+    height: 35px;
+    border: 1px solid #ff8c00;
+}
+
+.button {
+    width: 25%;
+    font-size: 14pt;
+    color: white;
+    background: #7F113E;
+    height: 55px;
+    padding: 10px;
+    border: 1px solid #F5C4AB;
+}
+
+.button:hover {
+    border: 1px solid white;
+}

@@ -14,30 +14,21 @@
 <head>
     <title>Регистрация</title>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="styles/style_reg.css">
+    <link rel="stylesheet" type="text/css" href="styles/style.css">
+
 
 </head>
 <body>
 <div id="container">
-    <h1>Регистрация</h1>
+    <h1>Игромир<br></br>Регистрация</h1>
     <div id="non-id">
         <form method="post" action="reg" id="reg_form">
             <p>${login_error}</p>
-            <table>
-                <tr>
-                    <td>Введите имя:</td>
-                    <td><input type="text" name="nickname" id="nickname" required></td>
-                </tr>
-                <tr>
-                    <td>Логин:</td>
-                    <td><input type="text" name="login" id="login" required></td>
-                </tr>
-                <tr>
-                    <td>Пароль:</td>
-                    <td><input type="password" name="password" id="password" required></td>
-                </tr>
-            </table>
-
+            Введите имя:
+            <input type="text" name="nickname" id="nickname" required><br>
+            Логин:<input type="text" name="login" id="login" required><br>
+            Пароль:
+            <input type="password" name="password" id="password" required><br>
             <input type="submit" value="Зарегистрироваться" id="reg_btn">
         </form>
         <p>Уже есть аккаунт? <a href="login.jsp">Войти</a></p>

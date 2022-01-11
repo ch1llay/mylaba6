@@ -53,7 +53,7 @@ public class LoginAcc extends HttpServlet {
                 session.setAttribute("LOGIN", user.userLogin);
                 session.setAttribute("NICKNAME", user.nickname);
                 if(user.role.equals("admin"))
-                    req.setAttribute("users", users.users.values());
+                    req.setAttribute("count", users.users.values().size());
                 req.getRequestDispatcher((user.role.equals("admin") )? "/admin_lk.jsp":"/user_lk.jsp").forward(req, resp); // Редирект в ЛК
             } else {
                 // Выдача ошибки
